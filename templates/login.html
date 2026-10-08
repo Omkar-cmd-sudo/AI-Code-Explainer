@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Code Explainer - Login</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="new-login">
+
+    <!-- LEFT SIDE -->
+
+    <div class="login-sidebar">
+
+        <div class="login-brand">
+            <div class="login-logo">AI</div>
+
+            <div>
+                <h2>AI Code Explainer</h2>
+                <span>Smart Coding Assistant</span>
+            </div>
+        </div>
+
+
+        <div class="login-sidebar-content">
+
+            <span class="login-tag">
+                ✨ AI POWERED
+            </span>
+
+            <h1>
+                Understand Your Code
+                <span>Smarter & Faster.</span>
+            </h1>
+
+            <p>
+                Learn, understand and improve your code with the help
+                of an intelligent AI coding assistant.
+            </p>
+
+
+            <div class="login-benefits">
+
+                <div class="login-benefit">
+                    <div class="benefit-icon">💡</div>
+
+                    <div>
+                        <h3>Explain Code</h3>
+                        <p>Understand your code in simple language.</p>
+                    </div>
+                </div>
+
+
+                <div class="login-benefit">
+                    <div class="benefit-icon">🐞</div>
+
+                    <div>
+                        <h3>Detect Errors</h3>
+                        <p>Find coding errors and get solutions.</p>
+                    </div>
+                </div>
+
+
+                <div class="login-benefit">
+                    <div class="benefit-icon">📜</div>
+
+                    <div>
+                        <h3>Code History</h3>
+                        <p>Keep track of your previous AI results.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="login-copyright">
+            © 2026 AI Code Explainer
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="login-main">
+
+        <div class="login-card">
+
+            <div class="login-card-header">
+
+                <div class="mobile-login-logo">
+                    AI
+                </div>
+
+                <h1>Welcome Back!</h1>
+
+                <p>
+                    Login to continue to your coding workspace.
+                </p>
+
+            </div>
+
+            {% if error %}
+                 <div class="login-error">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            {% if success %}
+               <div class="login-success">
+                 {{ success }}
+              </div>
+            {% endif %}
+
+
+            <form method="POST" action="/login">
+
+                <!-- EMAIL -->
+
+                <div class="login-input-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="login-input-group">
+
+                    <div class="password-heading">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                    </div>
+
+
+                    <div class="login-password-box">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                       <button
+                          type="button"
+                           onclick="togglePassword()"
+                           id="eyeIcon"
+                           class="password-toggle">
+                           Show
+                        </button>
+
+                    </div>
+
+
+                    <!-- FORGOT PASSWORD -->
+
+                    <div class="forgot-password-link">
+
+                        <a href="/forgot-password">
+                            Forgot Password?
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button type="submit" class="new-login-button">
+                    Login
+                </button>
+
+            </form>
+
+
+            <div class="login-divider">
+                <span>OR</span>
+            </div>
+
+
+            <p class="create-account">
+                Don't have an account?
+                <a href="/register">Create Account</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function togglePassword() {
+
+    const password = document.getElementById("password");
+    const eyeIcon = document.getElementById("eyeIcon");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+        eyeIcon.textContent = "Hide";
+
+    } else {
+
+        password.type = "password";
+        eyeIcon.textContent = "Show";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

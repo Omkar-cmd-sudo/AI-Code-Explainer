@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - AI Code Explainer</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="profile-container">
+
+        <div class="profile-header">
+            <h1>My Profile</h1>
+            <p>Manage your AI Code Explainer account</p>
+        </div>
+
+        <div class="profile-card">
+
+            <div class="profile-icon">
+                👤
+            </div>
+
+            <div class="profile-welcome">
+                <h2>{{ user.name }}</h2>
+                <p class="profile-email">{{ user.email }}</p>
+                <span class="profile-role">AI Code Explainer User</span>
+            </div>
+
+            <div class="profile-info">
+
+                <div class="profile-info-box">
+                    <span>Name</span>
+                    <strong>{{ user.name }}</strong>
+                </div>
+
+                <div class="profile-info-box">
+                    <span>Email</span>
+                    <strong>{{ user.email }}</strong>
+                </div>
+
+            </div>
+
+            <div class="profile-buttons">
+
+                <a href="/dashboard">
+                    <button type="button">🏠 Dashboard</button>
+                </a>
+
+                <a href="/change-password">
+                    <button type="button">🔐 Change Password</button>
+                </a>
+
+                <a href="/logout">
+                    <button type="button" class="logout-button">
+                        🚪 Logout
+                    </button>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

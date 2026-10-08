@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Code History - AI Code Explainer</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="history-container">
+
+        <div class="history-header">
+            <h1>Code History</h1>
+            <p>Your previous AI code explanations and error detections</p>
+        </div>
+
+        {% if codes %}
+
+            {% for item in codes %}
+
+            <div class="history-card">
+
+                {% if session.get("user_role") == "admin" and item.user %}
+                    <div class="history-user">
+                        👤 User: {{ item.user.name }}
+                        <br>
+                        📧 Email: {{ item.user.email }}
+                    </div>
+                {% endif %}
+
+                <div class="history-meta">
+
+    <div class="history-left-meta">
+
+        <span class="history-language">
+            {{ item.language }}
+        </span>
+
+        {% if item.result_type == "Error Detection" %}
+            <span class="history-type error-type">
+                🐞 Error Detection
+            </span>
+        {% else %}
+            <span class="history-type explanation-type">
+                ✨ Explanation
+            </span>
+        {% endif %}
+
+    </div>
+
+    <span class="history-date">
+        🕒 {{ item.created_at.strftime('%d-%m-%Y %I:%M %p') }}
+    </span>
+
+   </div>
+                <h3>Your Code</h3>
+
+                <pre class="code-box">{{ item.code }}</pre>
+
+                <h3>🤖 AI Result:</h3>
+
+                <pre class="result-box">{{ item.result }}</pre>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty-history">
+                <h2>No Code History Found</h2>
+                <p>Explain some code to see your history here.</p>
+
+                <a href="/explain">
+                    <button type="button">Explain Code</button>
+                </a>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verify Email - AI Code Explainer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="otp-container">
+
+        <div class="otp-card">
+
+            <div class="otp-icon">
+                📧
+            </div>
+
+            <h1>Verify Your Email</h1>
+
+            <p>
+                Enter the 6-digit OTP sent to your email address.
+            </p>
+             
+            {% if message %}
+                <div class="otp-success">
+                   {{ message }}
+             </div>
+           {% endif %}
+
+            {% if error %}
+               <div class="otp-error">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form method="POST" action="/verify-otp">
+
+                <label for="otp">Enter OTP</label>
+
+                <input
+                    type="text"
+                    id="otp"
+                    name="otp"
+                    placeholder="Enter 6-digit OTP"
+                    maxlength="6"
+                    required
+                >
+
+                <button type="submit">
+                    Verify OTP
+                </button>
+
+            </form>
+
+            <p class="otp-note">
+                OTP is valid for 5 minutes.
+            </p>
+
+            <a href="{{ url_for('resend_otp') }}" class="resend-otp">
+                Resend OTP
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

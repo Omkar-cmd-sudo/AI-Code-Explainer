@@ -1,0 +1,8 @@
+Flask
+Flask-SQLAlchemy
+psycopg2-binary
+python-dotenv
+google-genai
+Werkzeug
+gunicorn
+Flask-Mail

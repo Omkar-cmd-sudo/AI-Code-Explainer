@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - AI Code Explainer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <!-- Header -->
+
+        <div class="admin-header">
+
+            <div>
+                <span class="admin-badge">👑 ADMIN PANEL</span>
+
+                <h1>Admin Dashboard</h1>
+
+                <p>
+                    Manage users and monitor AI Code Explainer activity.
+                </p>
+            </div>
+
+            <div class="admin-welcome">
+                <span>Welcome,</span>
+                <strong>{{ session.get("user_name", "Admin") }}</strong>
+            </div>
+
+        </div>
+
+
+        <!-- Statistics -->
+
+        <div class="admin-stats">
+
+            <div class="stat-card">
+
+                <div class="admin-stat-icon">
+                    👥
+                </div>
+
+                <div>
+                    <h3>Total Users</h3>
+                    <p>{{ total_users }}</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="admin-stat-icon">
+                    👑
+                </div>
+
+                <div>
+                    <h3>Total Admins</h3>
+                    <p>{{ total_admins }}</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="admin-stat-icon">
+                    💻
+                </div>
+
+                <div>
+                    <h3>Code History</h3>
+                    <p>{{ total_history }}</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Registered Users -->
+
+        <div class="admin-section">
+
+            <div class="admin-section-header">
+
+                <div>
+                    <span class="section-label">USER MANAGEMENT</span>
+                    <h2>Registered Users</h2>
+                </div>
+
+                <span class="user-count">
+                    {{ total_users }} Users
+                </span>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for user in users %}
+
+                        <tr>
+
+                            <td>
+                                #{{ user.id }}
+                            </td>
+
+                            <td>
+                                <strong>{{ user.name }}</strong>
+                            </td>
+
+                            <td>
+                                {{ user.email }}
+                            </td>
+
+                            <td>
+
+                                {% if user.role == "admin" %}
+
+                                <span class="role-badge admin-role">
+                                    👑 Admin
+                                </span>
+
+                                {% else %}
+
+                                <span class="role-badge user-role">
+                                    👤 User
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {% if user.id == session.get("user_id") %}
+
+                                <button
+                                    type="button"
+                                    class="current-admin-btn"
+                                    disabled>
+                                    🔒 Current Admin
+                                </button>
+
+                                {% else %}
+
+                                <form
+                                       method="POST"
+                                    action="/admin/delete-user/{{ user.id }}"
+                                     onsubmit="return confirm('Are you sure you want to delete this user?');">
+
+                                  <button
+                                     type="submit"
+                                      class="delete-user-btn">
+                                         🗑️ Delete
+                                    </button>
+
+                                </form>
+
+                                <form
+                                    method="POST"
+                                    action="/admin/change-role/{{ user.id }}">
+
+                                    {% if user.role == "user" %}
+
+                                    <button
+                                        type="submit"
+                                        class="make-admin-btn">
+                                        👑 Make Admin
+                                    </button>
+
+                                    {% else %}
+
+                                    <button
+                                        type="submit"
+                                        class="make-user-btn">
+                                        👤 Make User
+                                    </button>
+
+                                    {% endif %}
+
+                                </form>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- Admin Actions -->
+
+        <div class="admin-buttons">
+
+            <a href="/dashboard">
+                <button type="button">
+                    🏠 Dashboard
+                </button>
+            </a>
+
+            <a href="/history">
+                <button type="button">
+                    💻 View All Code History
+                </button>
+            </a>
+
+            <a href="/logout">
+                <button type="button" class="admin-logout">
+                    🚪 Logout
+                </button>
+            </a>
+
+        </div>
+
+
+        <!-- Footer -->
+
+        <div class="admin-footer">
+
+            <p>
+                © 2026 AI Code Explainer
+            </p>
+
+            <p>
+                Administrator Control Panel
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

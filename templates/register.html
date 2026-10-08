@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Code Explainer - Register</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="new-register">
+
+    <!-- LEFT SIDE -->
+
+    <div class="register-sidebar">
+
+        <div class="register-brand">
+
+            <div class="register-logo">
+                AI
+            </div>
+
+            <div>
+                <h2>AI Code Explainer</h2>
+                <span>Smart Coding Assistant</span>
+            </div>
+
+        </div>
+
+
+        <div class="register-sidebar-content">
+
+            <span class="register-tag">
+                ✨ JOIN THE AI CODING COMMUNITY
+            </span>
+
+            <h1>
+                Start Your
+                <span>Smart Coding Journey.</span>
+            </h1>
+
+            <p>
+                Create your account and use AI to understand code,
+                detect errors, and improve your programming skills.
+            </p>
+
+
+            <div class="register-benefits">
+
+                <div class="register-benefit">
+
+                    <div class="register-benefit-icon">
+                        💡
+                    </div>
+
+                    <div>
+                        <h3>Learn Better</h3>
+                        <p>Understand programming concepts easily.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="register-benefit">
+
+                    <div class="register-benefit-icon">
+                        🐞
+                    </div>
+
+                    <div>
+                        <h3>Fix Coding Errors</h3>
+                        <p>Find errors and understand their solutions.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="register-benefit">
+
+                    <div class="register-benefit-icon">
+                        📜
+                    </div>
+
+                    <div>
+                        <h3>Save Your Work</h3>
+                        <p>Access your previous code explanations.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="register-copyright">
+            © 2026 AI Code Explainer
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="register-main">
+
+        <div class="register-card">
+
+            <div class="register-card-header">
+
+                <div class="mobile-register-logo">
+                    AI
+                </div>
+
+                <h1>Create Account</h1>
+
+                <p>
+                    Join AI Code Explainer and start coding smarter.
+                </p>
+
+            </div>
+
+
+            <!-- REGISTER FORM -->
+
+            <!-- REGISTER ERROR MESSAGE -->
+
+            {% if error %}
+              <div class="register-error">
+                   {{ error }}
+              </div>
+            {% endif %}
+
+            <form method="POST" action="/register">
+
+                <!-- NAME -->
+
+                <div class="register-input-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="register-input-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="register-input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                   <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="register-input-group">
+
+                    <label for="confirm_password">
+                        Confirm Password
+                    </label>
+
+                    <input
+                      type="password"
+                      id="confirm_password"
+                      name="confirm_password"
+                        placeholder="Confirm password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- SHOW PASSWORD -->
+
+                <div class="register-show-password">
+
+                    <input
+                        type="checkbox"
+                        id="showPassword"
+                    >
+
+                    <label for="showPassword">
+                        Show Password
+                    </label>
+
+                </div>
+
+
+                <!-- REGISTER BUTTON -->
+
+                <button
+                    type="submit"
+                    class="new-register-button"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <div class="register-divider">
+                <span>OR</span>
+            </div>
+
+
+            <p class="login-account">
+                Already have an account?
+                <a href="/">Login</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SHOW PASSWORD SCRIPT -->
+
+<script>
+
+const showPasswordCheckbox =
+    document.getElementById("showPassword");
+
+showPasswordCheckbox.addEventListener("change", function () {
+
+    const password =
+        document.getElementById("password");
+
+    const confirmPassword =
+        document.getElementById("confirm_password");
+
+    if (this.checked) {
+
+        password.type = "text";
+        confirmPassword.type = "text";
+
+    } else {
+
+        password.type = "password";
+        confirmPassword.type = "password";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

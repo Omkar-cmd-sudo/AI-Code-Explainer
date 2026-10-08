@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - AI Code Explainer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="new-dashboard">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">AI</div>
+
+            <div class="brand-text">
+                <h2>Code Explainer</h2>
+                <span>AI Coding Assistant</span>
+            </div>
+        </div>
+
+        <div class="sidebar-menu">
+
+            <p class="menu-title">MAIN MENU</p>
+
+            <a href="/dashboard" class="nav-item active">
+                <span class="nav-icon">🏠</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/explain" class="nav-item">
+                <span class="nav-icon">💡</span>
+                <span>Explain Code</span>
+            </a>
+
+            <a href="/detect-error" class="nav-item">
+                <span class="nav-icon">🐞</span>
+                <span>Detect Errors</span>
+            </a>
+
+            <a href="/history" class="nav-item">
+                <span class="nav-icon">📜</span>
+                <span>Code History</span>
+            </a>
+
+            <p class="menu-title">ACCOUNT</p>
+
+            <a href="/profile" class="nav-item">
+                <span class="nav-icon">👤</span>
+                <span>Profile</span>
+            </a>
+
+            {% if session.get("user_role") == "admin" %}
+
+            <a href="/admin" class="nav-item">
+                <span class="nav-icon">👑</span>
+                <span>Admin Panel</span>
+            </a>
+
+            {% endif %}
+
+        </div>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout" class="logout-item">
+                <span>🚪</span>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="dashboard-main">
+
+        <!-- Top Bar -->
+
+        <div class="dashboard-topbar">
+
+            <div>
+                <p class="page-label">OVERVIEW</p>
+
+                <h1>Dashboard</h1>
+
+                <p class="topbar-description">
+                    Your intelligent workspace for understanding and improving code.
+                </p>
+            </div>
+
+            <div class="user-welcome">
+
+                <div class="user-avatar">
+                    {{ session.get("user_name", "U")[0]|upper }}
+                </div>
+
+                <div class="user-info">
+                    <span>Welcome back</span>
+                    <strong>{{ session.get("user_name", "User") }}</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= HERO BANNER ================= -->
+
+        <section class="hero-banner">
+
+            <div class="hero-content">
+
+                <span class="hero-badge">
+                    ✨ AI POWERED
+                </span>
+
+                <h2>
+                    Understand Your Code
+                    <br>
+                    <span>Smarter & Faster.</span>
+                </h2>
+
+                <p>
+                    Use AI to explain your code, detect coding errors,
+                    and improve your programming skills with simple
+                    and easy-to-understand explanations.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="/explain" class="primary-action">
+                        💡 Explain My Code
+                    </a>
+
+                    <a href="/detect-error" class="secondary-action">
+                        🐞 Detect Errors
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="hero-visual">
+
+                <div class="code-window">
+
+                    <div class="code-window-top">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="code-content">
+
+                        <p>
+                            <span class="code-number">01</span>
+                            <span class="code-keyword">def</span>
+                            <span class="code-function">hello</span>():
+                        </p>
+
+                        <p>
+                            <span class="code-number">02</span>
+                            &nbsp;&nbsp;&nbsp;
+                            <span class="code-keyword">return</span>
+                            <span class="code-string">"Hello World"</span>
+                        </p>
+
+                        <p>
+                            <span class="code-number">03</span>
+                            <span class="code-comment">
+                                # AI explains your code
+                            </span>
+                        </p>
+
+                    </div>
+
+                    <div class="ai-status">
+                        <span class="status-dot"></span>
+                        AI Ready
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUICK STATS ================= -->
+
+        <section class="quick-stats">
+
+            <div class="stat-box">
+
+                <div class="stat-icon explain-icon">
+                    💡
+                </div>
+
+                <div>
+                    <h3>Explain Code</h3>
+                    <p>Understand code easily</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <div class="stat-icon error-icon">
+                    🐞
+                </div>
+
+                <div>
+                    <h3>Detect Errors</h3>
+                    <p>Find coding problems</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <div class="stat-icon history-icon">
+                    📜
+                </div>
+
+                <div>
+                    <h3>Code History</h3>
+                    <p>View previous results</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <div class="stat-icon profile-icon">
+                    👤
+                </div>
+
+                <div>
+                    <h3>My Profile</h3>
+                    <p>Manage your account</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= TOOLS SECTION ================= -->
+
+        <section class="tools-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="section-label">FEATURES</p>
+
+                    <h2>What would you like to do?</h2>
+                </div>
+
+                <p>
+                    Choose a tool to get started
+                </p>
+
+            </div>
+
+
+            <div class="tools-grid">
+
+
+                <!-- Explain Code -->
+
+                <a href="/explain" class="tool-card">
+
+                    <div class="tool-card-icon explain-card-icon">
+                        💡
+                    </div>
+
+                    <div class="tool-card-content">
+
+                        <h3>Explain Code</h3>
+
+                        <p>
+                            Get a simple and detailed explanation
+                            of your code using AI.
+                        </p>
+
+                        <span class="tool-link">
+                            Start Explaining →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- Detect Errors -->
+
+                <a href="/detect-error" class="tool-card">
+
+                    <div class="tool-card-icon error-card-icon">
+                        🐞
+                    </div>
+
+                    <div class="tool-card-content">
+
+                        <h3>Detect Coding Errors</h3>
+
+                        <p>
+                            Find programming errors and understand
+                            why they occur with corrected code.
+                        </p>
+
+                        <span class="tool-link">
+                            Check My Code →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- History -->
+
+                <a href="/history" class="tool-card">
+
+                    <div class="tool-card-icon history-card-icon">
+                        📜
+                    </div>
+
+                    <div class="tool-card-content">
+
+                        <h3>Code History</h3>
+
+                        <p>
+                            View your previous code explanations
+                            and error detection results.
+                        </p>
+
+                        <span class="tool-link">
+                            View History →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- Profile -->
+
+                <a href="/profile" class="tool-card">
+
+                    <div class="tool-card-icon profile-card-icon">
+                        👤
+                    </div>
+
+                    <div class="tool-card-content">
+
+                        <h3>My Profile</h3>
+
+                        <p>
+                            View your account information and
+                            manage your profile settings.
+                        </p>
+
+                        <span class="tool-link">
+                            Open Profile →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer class="dashboard-footer">
+
+            <p>
+                © 2026 AI Code Explainer
+            </p>
+
+            <p>
+                Intelligent Coding Assistance
+            </p>
+
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>
