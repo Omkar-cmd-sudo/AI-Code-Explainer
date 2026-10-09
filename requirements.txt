@@ -5,4 +5,4 @@ python-dotenv
 google-genai
 Werkzeug
 gunicorn
-Flask-Mail
+requests

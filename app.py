@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
-from flask_mail import Mail, Message
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
 from google import genai
 from urllib.parse import quote_plus
 import os
+import requests
 import time
 import random
 from datetime import datetime, timedelta
@@ -18,14 +18,6 @@ client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 app = Flask(__name__)
 app.secret_key = "ai-code-explainer-secret-key"
-
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 587
-app.config["MAIL_USE_TLS"] = True
-app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
-app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
-
-mail = Mail(app)
 
 postgres_password = quote_plus(os.getenv("POSTGRES_PASSWORD"))
 
@@ -88,46 +80,78 @@ def generate_otp():
     return str(random.randint(100000, 999999))
 
 def send_otp_email(email, otp):
-    msg = Message(
-        subject="AI Code Explainer - Email Verification OTP",
-        sender=os.getenv("MAIL_USERNAME"),
-        recipients=[email]
-    )
+    api_key = os.getenv("BREVO_API_KEY")
 
-    msg.body = f"""
+    url = "https://api.brevo.com/v3/smtp/email"
+
+    headers = {
+        "accept": "application/json",
+        "api-key": api_key,
+        "content-type": "application/json"
+    }
+
+    payload = {
+        "sender": {
+            "name": "AI Code Explainer",
+            "email": os.getenv("MAIL_USERNAME")
+        },
+        "to": [
+            {"email": email}
+        ],
+        "subject": "Your AI Code Explainer OTP",
+        "textContent": f"""
 Hello,
 
-Welcome to AI Code Explainer!
-
-Your email verification OTP is:
-
-{otp}
-
-This OTP is valid for 5 minutes.
+Your OTP for AI Code Explainer is: {otp}
 
 Please do not share this OTP with anyone.
 
 Regards,
-AI Code Explainer Team
+AI Code Explainer System
 """
+    }
 
-    mail.send(msg)
-
-def send_welcome_email(email, name):
-    msg = Message(
-        subject="Welcome to AI Code Explainer",
-        sender=os.getenv("MAIL_USERNAME"),
-        recipients=[email]
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload,
+        timeout=20
     )
 
-    msg.body = f"""
+    if not response.ok:
+        print("Brevo Error:", response.status_code, response.text)
+
+    response.raise_for_status()
+
+
+def send_welcome_email(email, name):
+    api_key = os.getenv("BREVO_API_KEY")
+
+    url = "https://api.brevo.com/v3/smtp/email"
+
+    headers = {
+        "accept": "application/json",
+        "api-key": api_key,
+        "content-type": "application/json"
+    }
+
+    payload = {
+        "sender": {
+            "name": "AI Code Explainer",
+            "email": os.getenv("MAIL_USERNAME")
+        },
+        "to": [
+            {"email": email, "name": name}
+        ],
+        "subject": "Welcome to AI Code Explainer",
+        "textContent": f"""
 Hello {name},
 
 Welcome to AI Code Explainer!
 
-Your account has been successfully created and your email has been verified.
+Your account has been created successfully.
 
-You can now use AI Code Explainer to:
+You can now:
 - Explain programming code
 - Detect coding errors
 - View your code history
@@ -138,8 +162,20 @@ Thank you for joining us!
 Regards,
 AI Code Explainer System
 """
+    }
 
-    mail.send(msg)
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload,
+        timeout=20
+    )
+
+    if not response.ok:
+        print("Welcome Email Error:", response.status_code, response.text)
+
+    response.raise_for_status()
+
 
 
 @app.route("/")
