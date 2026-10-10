@@ -3457,3 +3457,201 @@ body:has(.new-register) {
 .explain-top h1 {
     color: #f8fafc !important;
 }
+
+
+/* ===== MOBILE RESPONSIVE FIX ===== */
+
+@media (max-width: 768px) {
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* Dashboard */
+    .new-dashboard {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .new-dashboard .dashboard-sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .new-dashboard .dashboard-main {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        padding: 18px 14px !important;
+    }
+
+    .dashboard-topbar,
+    .admin-header,
+    .admin-section-header,
+    .admin-footer {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .dashboard-cards,
+    .dashboard-stats,
+    .stats-grid,
+    .admin-stats,
+    .complexity-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .dashboard-card,
+    .stat-card,
+    .stat-box,
+    .tool-card,
+    .welcome-card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Admin dashboard */
+    .admin-container {
+        width: 100%;
+        margin: 15px auto;
+        padding: 16px 12px;
+        border-radius: 12px;
+    }
+
+    .admin-header {
+        align-items: flex-start;
+    }
+
+    .admin-welcome {
+        text-align: left;
+    }
+
+    .admin-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .admin-table {
+        min-width: 650px;
+    }
+
+    /* Login and registration */
+    .new-login,
+    .new-register {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .login-sidebar,
+    .register-sidebar {
+        width: 100%;
+        min-height: auto;
+        padding: 22px;
+    }
+
+    .login-main,
+    .register-main {
+        width: 100%;
+        min-height: auto;
+        padding: 20px 14px;
+    }
+
+    .login-card,
+    .register-card {
+        width: 100%;
+        max-width: 450px;
+        padding: 25px 18px;
+    }
+
+    /* Explain and result pages */
+    .explain-page {
+        width: 100%;
+        padding: 0 12px;
+        margin: 20px auto;
+    }
+
+    .explainer-card,
+    .structured-result {
+        padding: 14px;
+    }
+
+    .result-header,
+    .result-title {
+        flex-wrap: wrap;
+    }
+
+    .result-actions,
+    .input-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .result-toggle,
+    .copy-btn,
+    .explain-btn,
+    .secondary-btn {
+        max-width: 100%;
+    }
+
+    .result-section-body {
+        overflow-wrap: anywhere;
+    }
+
+    .result-code-box pre {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    /* Profile, history and password pages */
+    .history-meta,
+    .history-left-meta,
+    .profile-buttons {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .profile-buttons a {
+        min-width: 100%;
+    }
+
+    .forgot-card,
+    .otp-card {
+        padding: 24px 18px;
+    }
+
+    /* Prevent long text from breaking layout */
+    h1 {
+        overflow-wrap: anywhere;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .login-card,
+    .register-card,
+    .forgot-card,
+    .otp-card {
+        padding: 20px 14px;
+    }
+
+    .explain-top h1 {
+        font-size: 23px;
+    }
+
+    .admin-container h1 {
+        font-size: 23px;
+    }
+}

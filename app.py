@@ -180,7 +180,7 @@ AI Code Explainer System
 
 @app.route("/")
 def index():
-    return redirect(url_for("login"))
+    return render_template("index.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
