@@ -290,7 +290,7 @@ def verify_otp():
 
         session.pop("pending_user_id", None)
 
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
     return render_template("verify_otp.html")
 
@@ -361,6 +361,7 @@ def logout():
     session.clear()
 
     return redirect(url_for("login"))
+
 
 @app.route("/forgot-password", methods=["GET", "POST"])
 def forgot_password():
@@ -504,7 +505,7 @@ def reset_password():
 def dashboard():
 
     if "user_id" not in session:
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
     return render_template("dashboard.html")
 
@@ -514,7 +515,7 @@ def profile():
     user_id = session.get("user_id")
 
     if not user_id:
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
     user = User.query.get(user_id)
 
@@ -529,7 +530,7 @@ def change_password():
     user_id = session.get("user_id")
 
     if not user_id:
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
     user = User.query.get(user_id)
 
@@ -557,7 +558,7 @@ def change_password():
 def history():
 
     if "user_id" not in session:
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
     if session.get("user_role") == "admin":
         codes = CodeHistory.query.order_by(CodeHistory.id.desc()).all()
@@ -572,7 +573,7 @@ def history():
 def explain():
 
     if "user_id" not in session:
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
     if request.method == "POST":
 
@@ -637,7 +638,7 @@ For Time Complexity and Space Complexity:
 def detect_error():
 
     if "user_id" not in session:
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
     if request.method == "POST":
         language = request.form["language"]
@@ -689,7 +690,7 @@ Give the answer in simple language:
 def admin_dashboard():
 
     if "user_id" not in session:
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
     if session.get("user_role") != "admin":
         return "Access Denied"
@@ -711,7 +712,7 @@ def admin_dashboard():
 def change_role(user_id):
 
     if "user_id" not in session:
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
     if session.get("user_role") != "admin":
         return "Access Denied"
@@ -737,7 +738,7 @@ def change_role(user_id):
 def delete_user(user_id):
 
     if "user_id" not in session:
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
     if session.get("user_role") != "admin":
         return "Access Denied"
