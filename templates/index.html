@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Code Explainer | Understand Code Better</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b1020;
+            color: #f8fafc;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Navigation */
+        .landing-nav {
+            width: 100%;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid #263047;
+            background: #0b1020;
+        }
+
+        .landing-brand {
+            font-size: 21px;
+            font-weight: bold;
+            color: #a5b4fc;
+            white-space: nowrap;
+        }
+
+        .landing-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .landing-links a {
+            color: #dbe3f4;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .landing-links a:hover {
+            color: #a5b4fc;
+        }
+
+        .landing-btn {
+            display: inline-block;
+            padding: 11px 19px;
+            background: #6366f1;
+            color: white !important;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .landing-btn:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .landing-hero {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 75px 35px 65px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 45px;
+            align-items: center;
+        }
+
+        .hero-content {
+            min-width: 0;
+        }
+
+        .landing-tag {
+            display: inline-block;
+            padding: 7px 13px;
+            border-radius: 20px;
+            background: #202747;
+            color: #a5b4fc;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .landing-hero h1 {
+            margin: 22px 0 18px;
+            font-size: clamp(34px, 3.5vw, 48px);
+            line-height: 1.18;
+            letter-spacing: -1px;
+        }
+
+        .landing-hero h1 span {
+            color: #818cf8;
+        }
+
+        .hero-description {
+            max-width: 520px;
+            color: #b9c3d8;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .landing-actions {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            flex-wrap: wrap;
+            margin-top: 26px;
+        }
+
+        .landing-secondary {
+            display: inline-block;
+            padding: 10px 17px;
+            border: 1px solid #536078;
+            border-radius: 8px;
+            color: #f8fafc;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .landing-secondary:hover {
+            background: #202747;
+        }
+
+        /* Code Preview */
+        .code-card {
+            width: 100%;
+            min-width: 0;
+            padding: 22px;
+            overflow: hidden;
+            background: #121a2d;
+            border: 1px solid #303b56;
+            border-radius: 14px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .code-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding-bottom: 13px;
+            border-bottom: 1px solid #303b56;
+            color: #b9c3d8;
+            font-size: 13px;
+        }
+
+        .code-language {
+            padding: 4px 9px;
+            border-radius: 5px;
+            background: #202747;
+            color: #a5b4fc;
+        }
+
+        .code-card pre {
+            max-width: 100%;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            color: #c7d2fe;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .code-result {
+            margin-top: 18px;
+            padding-top: 15px;
+            border-top: 1px solid #303b56;
+            color: #86efac;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .result-title {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        /* General Sections */
+        .landing-section {
+            padding: 60px 7%;
+            text-align: center;
+        }
+
+        .section-heading {
+            margin-bottom: 10px;
+            font-size: clamp(25px, 3vw, 32px);
+            line-height: 1.3;
+        }
+
+        .landing-muted {
+            color: #b9c3d8;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .landing-features {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: 32px auto 0;
+            text-align: left;
+        }
+
+        .landing-feature {
+            padding: 23px;
+            background: #121a2d;
+            border: 1px solid #303b56;
+            border-radius: 12px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .landing-feature:hover {
+            transform: translateY(-4px);
+            border-color: #6366f1;
+        }
+
+        .landing-feature .emoji {
+            margin-bottom: 10px;
+            font-size: 27px;
+        }
+
+        .landing-feature h3 {
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .landing-feature p {
+            font-size: 13px;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            padding: 60px 20px 75px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 10px;
+            font-size: clamp(25px, 3vw, 32px);
+        }
+
+        .cta-section p {
+            margin-bottom: 22px;
+        }
+
+        /* Footer */
+        .landing-footer {
+            padding: 22px 15px;
+            border-top: 1px solid #263047;
+            color: #9ca9c1;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* Tablet and Mobile */
+        @media (max-width: 850px) {
+            .landing-nav {
+                padding: 17px 5%;
+            }
+
+            .landing-links {
+                gap: 13px;
+            }
+
+            .landing-hero {
+                padding: 55px 5%;
+                gap: 30px;
+            }
+
+            .landing-hero h1 {
+                font-size: 36px;
+            }
+
+            .landing-features {
+                gap: 14px;
+            }
+
+            .landing-feature {
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .landing-nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .landing-links {
+                width: 100%;
+                justify-content: flex-start;
+                gap: 15px;
+            }
+
+            .landing-hero {
+                grid-template-columns: minmax(0, 1fr);
+                padding: 45px 6%;
+                gap: 35px;
+            }
+
+            .landing-hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .landing-features {
+                grid-template-columns: minmax(0, 1fr);
+                max-width: 430px;
+            }
+
+            .landing-section {
+                padding: 45px 6%;
+            }
+
+            .code-card {
+                padding: 17px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .landing-brand {
+                font-size: 19px;
+            }
+
+            .landing-links {
+                gap: 12px;
+            }
+
+            .landing-hero h1 {
+                font-size: 31px;
+            }
+
+            .landing-actions {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="landing-nav">
+        <div class="landing-brand">⌘ AI Code Explainer</div>
+
+        <div class="landing-links">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a class="landing-btn" href="{{ url_for('register') }}">Get Started</a>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="landing-hero">
+            <div class="hero-content">
+                <span class="landing-tag">SMARTER CODING STARTS HERE</span>
+
+                <h1>
+                    Understand Code.<br>
+                    <span>Fix Errors Faster.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Learn what your code does, understand programming errors,
+                    and explore clear explanations with AI-powered assistance.
+                    Make your coding journey easier, one line at a time.
+                </p>
+
+                <div class="landing-actions">
+                    <a class="landing-btn" href="{{ url_for('register') }}">
+                        Get Started →
+                    </a>
+
+                    <a class="landing-secondary" href="{{ url_for('login') }}">
+                        Login to Your Account
+                    </a>
+                </div>
+            </div>
+
+            <!-- Example Code Preview -->
+            <div class="code-card">
+                <div class="code-top">
+                    <span>example.py</span>
+                    <span class="code-language">Python</span>
+                </div>
+
+                <pre>def add(a, b):
+    return a + b
+
+result = add(5, 3)
+print(result)</pre>
+
+                <div class="code-result">
+                    <div class="result-title">✓ AI Explanation</div>
+                    This function adds two values and returns their sum.
+                    <br>
+                    Output: 8
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="landing-section" id="features">
+            <h2 class="section-heading">
+                Everything You Need to Understand Code
+            </h2>
+
+            <p class="landing-muted">
+                Useful tools to help you learn, debug, and improve your programming skills.
+            </p>
+
+            <div class="landing-features">
+                <article class="landing-feature">
+                    <div class="emoji">💡</div>
+                    <h3>Explain Code</h3>
+                    <p class="landing-muted">
+                        Get understandable explanations of code and learn how it works.
+                    </p>
+                </article>
+
+                <article class="landing-feature">
+                    <div class="emoji">🛠️</div>
+                    <h3>Detect Errors</h3>
+                    <p class="landing-muted">
+                        Identify possible coding errors and review suggested corrections.
+                    </p>
+                </article>
+
+                <article class="landing-feature">
+                    <div class="emoji">📚</div>
+                    <h3>Code History</h3>
+                    <p class="landing-muted">
+                        Revisit saved explanations and error-detection results.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="landing-section" id="how-it-works">
+            <h2 class="section-heading">How It Works</h2>
+
+            <p class="landing-muted">
+                Get started in three simple steps.
+            </p>
+
+            <div class="landing-features">
+                <article class="landing-feature">
+                    <div class="emoji">👤</div>
+                    <h3>01. Create an Account</h3>
+                    <p class="landing-muted">
+                        Register to access your coding workspace.
+                    </p>
+                </article>
+
+                <article class="landing-feature">
+                    <div class="emoji">⌨️</div>
+                    <h3>02. Enter Your Code</h3>
+                    <p class="landing-muted">
+                        Choose a programming language and submit your code.
+                    </p>
+                </article>
+
+                <article class="landing-feature">
+                    <div class="emoji">🚀</div>
+                    <h3>03. Learn and Improve</h3>
+                    <p class="landing-muted">
+                        Review AI-generated explanations and error suggestions.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Final Call to Action -->
+        <section class="cta-section">
+            <h2>Ready to Make Coding Easier?</h2>
+
+            <p class="landing-muted">
+                Start exploring your code with AI assistance.
+            </p>
+
+            <a class="landing-btn" href="{{ url_for('register') }}">
+                Create Your Account →
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        © 2026 AI Code Explainer | Learn. Understand. Improve.
+    </footer>
+
+</body>
+</html>

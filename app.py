@@ -179,9 +179,8 @@ AI Code Explainer System
 
 
 @app.route("/")
-def home():
-    return render_template("login.html")
-
+def index():
+    return redirect(url_for("login"))
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -321,9 +320,12 @@ def resend_otp():
         message="A new OTP has been sent to your email."
     )
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
 
+    if request.method == "GET":
+        return render_template("login.html")
+   
     email = request.form["email"]
     password = request.form["password"]
 
@@ -358,8 +360,7 @@ def logout():
 
     session.clear()
 
-    return redirect(url_for("home"))
-
+    return redirect(url_for("login"))
 
 @app.route("/forgot-password", methods=["GET", "POST"])
 def forgot_password():

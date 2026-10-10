@@ -8,12 +8,10 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #f4f7fb;
+    background: #0b1020;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 98px;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -425,10 +423,9 @@ body:has(.new-login) {
 .new-dashboard {
     min-height: 100vh;
     display: flex;
-    background: #f5f7fb;
-    color: #172033;
+    background: #0b1020;
+    color: #f8fafc;
 }
-
 
 /* ================= SIDEBAR ================= */
 
@@ -577,24 +574,39 @@ body:has(.new-login) {
 .new-dashboard .dashboard-topbar h1 {
     margin: 0;
     font-size: 30px;
-    color: #111827;
+    color: #f8fafc !important;
 }
+
 
 .new-dashboard .topbar-description {
     margin: 7px 0 0;
-    color: #6b7280;
+    color: #cbd5e1 !important;
     font-size: 14px;
 }
+
 
 .new-dashboard .user-welcome {
     display: flex;
     align-items: center;
     gap: 11px;
-    background: white;
+    background: #121a2d !important;
     padding: 9px 15px 9px 9px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #26324a !important;
     border-radius: 14px;
 }
+
+.new-dashboard .user-info span {
+    display: block;
+    color: #cbd5e1 !important;
+    font-size: 11px;
+}
+
+.new-dashboard .user-info strong {
+    display: block;
+    color: #f8fafc !important;
+    font-size: 13px;
+}
+
 
 .new-dashboard .user-avatar {
     width: 40px;
@@ -3246,4 +3258,202 @@ body:has(.new-register) {
     font-size: 14px;
     font-weight: 600;
     text-align: center;
+}
+
+
+/* ===== Common Dark Theme: Login & Register ===== */
+
+.new-login,
+.new-register {
+    background: #0b1020 !important;
+    color: #f8fafc;
+    min-height: 100vh;
+}
+
+.login-main,
+.register-main {
+    background: #0b1020 !important;
+    color: #f8fafc;
+}
+
+.login-card,
+.register-card {
+    background: #121a2d !important;
+    color: #f8fafc !important;
+    border: 1px solid #26324a;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+.login-card h1,
+.login-card h2,
+.login-card p,
+.register-card h1,
+.register-card h2,
+.register-card p {
+    color: #f8fafc;
+}
+
+.login-sidebar,
+.register-sidebar {
+    background: linear-gradient(145deg, #121a2d, #1b2550) !important;
+    color: #f8fafc;
+}
+
+.login-input-group input,
+.register-input-group input {
+    background: #0b1020 !important;
+    color: #f8fafc !important;
+    border: 1px solid #35415d !important;
+}
+
+.login-input-group input::placeholder,
+.register-input-group input::placeholder {
+    color: #a5afc4;
+}
+
+.new-login-button,
+.new-register-button {
+    background: #6366f1 !important;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 9px;
+}
+
+.new-login-button:hover,
+.new-register-button:hover {
+    background: #4f46e5 !important;
+}
+
+.forgot-password-link,
+.create-account a,
+.login-account a {
+    color: #a5b4fc !important;
+}
+
+.login-divider,
+.register-divider {
+    color: #a5afc4;
+}
+
+.login-error,
+.register-error {
+    color: #fecaca;
+}
+
+
+/* ===== Dashboard Dark Theme ===== */
+
+.new-dashboard {
+    background: #0b1020 !important;
+    color: #f8fafc !important;
+}
+
+.new-dashboard .dashboard-main {
+    background: #0b1020 !important;
+    color: #f8fafc !important;
+}
+
+.new-dashboard .dashboard-main h1,
+.new-dashboard .dashboard-main h2,
+.new-dashboard .dashboard-main h3,
+.new-dashboard .dashboard-main p {
+    color: #f8fafc;
+}
+
+.new-dashboard .dashboard-main .dashboard-card,
+.new-dashboard .dashboard-main .stat-card,
+.new-dashboard .dashboard-main .welcome-card {
+    background: #121a2d !important;
+    color: #f8fafc !important;
+    border: 1px solid #26324a;
+}
+
+.new-dashboard .dashboard-main .dashboard-card p,
+.new-dashboard .dashboard-main .stat-card p,
+.new-dashboard .dashboard-main .welcome-card p {
+    color: #cbd5e1;
+}
+
+/* ===== Fix Dashboard Cards ===== */
+
+.new-dashboard .dashboard-main .dashboard-card,
+.new-dashboard .dashboard-main .stat-card,
+.new-dashboard .dashboard-main .welcome-card,
+.new-dashboard .dashboard-main a.dashboard-card {
+    background: #121a2d !important;
+    color: #f8fafc !important;
+    border: 1px solid #26324a !important;
+}
+
+.new-dashboard .dashboard-main .dashboard-card h1,
+.new-dashboard .dashboard-main .dashboard-card h2,
+.new-dashboard .dashboard-main .dashboard-card h3,
+.new-dashboard .dashboard-main .dashboard-card p,
+.new-dashboard .dashboard-main .stat-card h3,
+.new-dashboard .dashboard-main .stat-card p,
+.new-dashboard .dashboard-main .welcome-card h1,
+.new-dashboard .dashboard-main .welcome-card h2,
+.new-dashboard .dashboard-main .welcome-card p {
+    color: #f8fafc !important;
+}
+
+.new-dashboard .dashboard-main .dashboard-card a,
+.new-dashboard .dashboard-main .stat-card a {
+    color: #a5b4fc !important;
+}
+
+/* ===== Dashboard Card Theme Fix ===== */
+
+.new-dashboard .stat-box,
+.new-dashboard .tool-card {
+    background: #121a2d !important;
+    color: #f8fafc !important;
+    border: 1px solid #26324a !important;
+}
+
+.new-dashboard .stat-box h3,
+.new-dashboard .stat-box p,
+.new-dashboard .tool-card h3,
+.new-dashboard .tool-card p {
+    color: #f8fafc !important;
+}
+
+.new-dashboard .tool-card .tool-link {
+    color: #a5b4fc !important;
+}
+
+.new-dashboard .dashboard-topbar .topbar-description,
+.new-dashboard .user-info span {
+    color: #cbd5e1 !important;
+}
+
+.new-dashboard .user-welcome {
+    background: #121a2d !important;
+    border: 1px solid #26324a !important;
+}
+
+.new-dashboard .user-info strong {
+    color: #f8fafc !important;
+}
+
+/* Fix Dashboard Top White Gap */
+
+.new-dashboard .dashboard-main {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+.new-dashboard .dashboard-topbar {
+    background: #0b1020 !important;
+    margin-top: 0 !important;
+    padding-top: 30px !important;
+}
+
+.new-dashboard .dashboard-main::before {
+    display: none !important;
+}
+/* Fix Explain page heading */
+.explain-top h1 {
+    color: #f8fafc !important;
 }
